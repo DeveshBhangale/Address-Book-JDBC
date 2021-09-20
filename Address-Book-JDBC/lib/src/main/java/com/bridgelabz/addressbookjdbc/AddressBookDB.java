@@ -69,4 +69,16 @@ public class AddressBookDB {
 			while(rs.next()) System.out.println(rs.getString(1));
 		}catch(SQLException e){ e.printStackTrace();}
 	}
+
+	public void getContactsByCityOrState(Connection con, String city,String state) {
+		try {
+			String query ="select phoneNumber from address_book where city = ? or state = ? ";
+			PreparedStatement stmt=con.prepareStatement(query);
+			stmt.setString(1, city);
+			stmt.setString(2, state);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) System.out.println(rs.getString(1));
+		}catch(SQLException e){ e.printStackTrace();}
+		
+	}
 }

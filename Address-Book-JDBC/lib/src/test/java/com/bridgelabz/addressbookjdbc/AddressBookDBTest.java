@@ -45,5 +45,13 @@ public class AddressBookDBTest {
 		}catch(SQLException e){e.printStackTrace();} 
 	}
 	
+	@Test // UC19
+	public void getContactsByCityOrState() throws Exception{
+		try {
+			Connection con = addressBookDB.connectDb("address_book","root","database");
+			addressBookDB.getContactsByCityOrState(con,"london","UK");
+		}catch(SQLException e){e.printStackTrace();} 
+	}
+	
 	
 }
