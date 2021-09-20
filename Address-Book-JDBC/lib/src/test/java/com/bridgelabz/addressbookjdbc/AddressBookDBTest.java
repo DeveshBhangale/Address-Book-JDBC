@@ -53,13 +53,13 @@ public class AddressBookDBTest {
 		}catch(SQLException e){e.printStackTrace();} 
 	}
 	
-//	@Test // UC20
-//	public void addContact() throws Exception{
-//		try {
-//			Connection con = addressBookDB.connectDb("address_book","root","database");
-//			addressBookDB.addContact(con,"Parth","Bhangale","New Satara","kharghar","MH",410210,7867868,"abc@gmail.com","family","2021-09-20");
-//		}catch(SQLException e){e.printStackTrace();} 
-//	}
+	@Test // UC20
+	public void addContact() throws Exception{
+		try {
+			Connection con = addressBookDB.connectDb("address_book","root","database");
+			addressBookDB.addContact(con,"Parth","Bhangale","New Satara","kharghar","MH",410210,7867868,"abc@gmail.com","family","2021-09-20");
+		}catch(SQLException e){e.printStackTrace();} 
+	}
 	
 	
 }
