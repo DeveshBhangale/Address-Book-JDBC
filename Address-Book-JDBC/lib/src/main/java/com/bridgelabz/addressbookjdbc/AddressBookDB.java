@@ -56,7 +56,7 @@ public class AddressBookDB {
 			while(rs.next())  
 				System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)
 							+" "+rs.getString(4)+"  "+rs.getString(5) + " "+rs.getString(6) 
-							+" "+rs.getString(7)+"  "+rs.getString(8) + " "+rs.getString(9) + rs.getString(10));
+							+" "+rs.getString(7)+"  "+rs.getString(8) + " "+rs.getString(9)+" " + rs.getString(10)+" "+ rs.getString(11));
 			}catch(SQLException e){ e.printStackTrace();}
 	}
 
@@ -78,6 +78,33 @@ public class AddressBookDB {
 			stmt.setString(2, state);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) System.out.println(rs.getString(1));
+		}catch(SQLException e){ e.printStackTrace();}
+		
+	}
+
+	public void addContact(Connection con, String firstName, String lastName, String address, String city,
+			String state, int zipcode, int phoneNumber, String email, String type, String startDate) {
+		try {
+			String query ="insert into address_book values (?,?,?,?,?,?,?,?,?,?,?) ";
+			PreparedStatement stmt=con.prepareStatement(query);
+			Statement stmt1 = con.createStatement();
+			ResultSet a = stmt1.executeQuery("select max(id) from address_book");
+			int id = 0;
+			while(a.next()) id = a.getInt(1);
+			stmt.setInt(1, id+1);
+			stmt.setString(2,firstName);
+			stmt.setString(3, lastName);
+			stmt.setString(4, address);
+			stmt.setString(5, city);
+			stmt.setString(6, state);
+			stmt.setString(7, Integer.toString(zipcode));
+			stmt.setString(8, Integer.toString(phoneNumber));
+			stmt.setString(9, email);
+			stmt.setString(10, type);
+			stmt.setString(11, startDate);
+			stmt.executeUpdate();
+			ResultSet rs = stmt1.executeQuery("select * from address_book");
+			printData(rs);
 		}catch(SQLException e){ e.printStackTrace();}
 		
 	}
