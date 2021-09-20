@@ -40,6 +40,17 @@ public class AddressBookDB {
 		
 	}
 	
+	public void updateContactByName(Connection con,String name,int contact) {
+		try {
+			String query ="update address_book set phoneNumber=? where firstName=?";
+			PreparedStatement stmt=con.prepareStatement(query);
+			stmt.setString(1, Integer.toString(contact));
+			stmt.setString(2, name);
+			stmt.executeUpdate();
+			System.out.println("Updated !");
+		}catch(SQLException e) {e.printStackTrace();}
+	}
+	
 	public void printData(ResultSet rs) throws SQLException {
 		try {
 			while(rs.next())  
@@ -47,5 +58,15 @@ public class AddressBookDB {
 							+" "+rs.getString(4)+"  "+rs.getString(5) + " "+rs.getString(6) 
 							+" "+rs.getString(7)+"  "+rs.getString(8) + " "+rs.getString(9) + rs.getString(10));
 			}catch(SQLException e){ e.printStackTrace();}
+	}
+
+	public void getContactsWithParticularPeriod(Connection con, String startdate)throws SQLException {
+		try {
+			String query ="select phoneNumber from address_book where startdate between CAST(? AS DATE) AND DATE(NOW()) ";
+			PreparedStatement stmt=con.prepareStatement(query);
+			stmt.setString(1, startdate);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) System.out.println(rs.getString(1));
+		}catch(SQLException e){ e.printStackTrace();}
 	}
 }

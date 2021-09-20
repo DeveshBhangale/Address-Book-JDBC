@@ -28,4 +28,22 @@ public class AddressBookDBTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test // UC17
+	public void updateContact() throws Exception{
+		try {
+			Connection con = addressBookDB.connectDb("address_book","root","database");
+			addressBookDB.updateContactByName(con, "Lando",345353535);
+		}catch(SQLException e){e.printStackTrace();} 
+	}
+	
+//	@Test // UC18
+//	public void getContactsWithParticularPeriod() throws Exception{
+//		try {
+//			Connection con = addressBookDB.connectDb("address_book","root","database");
+//			addressBookDB.getContactsWithParticularPeriod(con,"2021-09-01");
+//		}catch(SQLException e){e.printStackTrace();} 
+//	}
+	
+	
 }
